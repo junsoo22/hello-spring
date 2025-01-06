@@ -2,7 +2,7 @@ package hello2.hello_spring2.domain;
 
 public class Member {
     private String name;
-    private Long id;
+    private Long id;    //시스템이 정하는 ID
 
     public String getName() {
         return name;
