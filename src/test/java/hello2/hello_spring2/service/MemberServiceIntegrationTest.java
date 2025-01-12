@@ -1,36 +1,31 @@
 package hello2.hello_spring2.service;
 
 import hello2.hello_spring2.domain.Member;
+import hello2.hello_spring2.repository.MemberRepository;
 import hello2.hello_spring2.repository.MemoryMemberRepository;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Commit;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
+@SpringBootTest
+@Transactional
+class MemberServiceIntegrationTest {
+    @Autowired MemberService memberService;
+    @Autowired MemberRepository memberRepository;
 
-class MemberServiceTest {
-    MemberService memberService;
-    MemoryMemberRepository memberRepository;
-
-    @BeforeEach
-    public void beforeEach(){  //동작하기 전에 넣어줌
-        memberRepository=new MemoryMemberRepository();
-        memberService=new MemberService(memberRepository);
-    }
-    @AfterEach   //메서드 끝날때마다 함수 실행하는 콜백 함수
-    public void afterEach(){
-        memberRepository.clearStore();
-    }
-
+    @Commit
     @Test
-    void 회원가입() {
+    void 회원가입() throws Exception{
         //given
         Member member=new Member();
-        member.setName("hello");
+        member.setName("spring100");
         
         //when
         Long saveId=memberService.join(member);
@@ -41,7 +36,7 @@ class MemberServiceTest {
     }
 
     @Test
-    public void 중복_회원_예외(){
+    public void 중복_회원_예외() throws Exception{
         //given
         Member member1=new Member();
         member1.setName("spring");
@@ -61,12 +56,4 @@ class MemberServiceTest {
 //        }
     }
 
-
-    @Test
-    void findMembers() {
-    }
-
-    @Test
-    void findOne() {
-    }
 }

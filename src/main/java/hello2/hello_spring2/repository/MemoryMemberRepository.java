@@ -1,9 +1,11 @@
 package hello2.hello_spring2.repository;
 
 import hello2.hello_spring2.domain.Member;
+import org.springframework.stereotype.Repository;
 
 import java.util.*;
 
+//@Repository
 public class MemoryMemberRepository implements MemberRepository {
     //Map-> 키-값 쌍으로 데이터를 저장하는 제너릭 컬렉션
     private static Map<Long, Member> store=new HashMap<>();

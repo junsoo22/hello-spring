@@ -3,15 +3,21 @@ package hello2.hello_spring2.service;
 import hello2.hello_spring2.domain.Member;
 import hello2.hello_spring2.repository.MemberRepository;
 import hello2.hello_spring2.repository.MemoryMemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
+//@Service
+@Transactional
 public class MemberService {
-    private final MemberRepository memberRepository;
+    private MemberRepository memberRepository;
 
-    public MemberService(MemberRepository memberRepository) {//외부에서 넣어주도록 바꿔줌
+    //@Autowired
+    public MemberService(MemberRepository memberRepository) {//생성자-> 외부에서 넣어주도록 바꿔줌
         this.memberRepository = memberRepository;
     }
 
